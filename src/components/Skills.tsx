@@ -21,11 +21,11 @@ export default function Skills() {
           技能展示
         </SectionTitle>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {skillGroups.map((group) => (
             <div
               key={group.category}
-              className="rounded-xl border border-dark-border/60 bg-dark-card/50 p-6 transition-colors hover:border-primary/25"
+              className="rounded-card border border-dark-border bg-dark-card/60 p-6 backdrop-blur-md transition-colors hover:border-white/25"
             >
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
                 {group.category}
@@ -35,7 +35,7 @@ export default function Skills() {
                   <span
                     key={skill.name}
                     title={LEVEL_LABEL[skill.level]}
-                    className={`inline-flex cursor-default items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-transform hover:scale-105 ${LEVEL_STYLES[skill.level]}`}
+                    className={`inline-flex cursor-default items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors hover:border-white/25 ${LEVEL_STYLES[skill.level]}`}
                   >
                     {skill.name}
                     <span className="text-[10px] opacity-60">

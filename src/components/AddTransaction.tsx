@@ -91,7 +91,7 @@ export default function AddTransaction() {
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="rounded-card border border-dark-border/60 bg-dark-card/50 p-6"
+            className="rounded-card border border-dark-border bg-dark-card/60 p-6 backdrop-blur-md"
           >
             {/* 类型切换 */}
             <div
@@ -113,7 +113,7 @@ export default function AddTransaction() {
                   onClick={() => switchType(t.key)}
                   className={`rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                     type === t.key
-                      ? 'bg-primary text-white shadow-sm'
+                      ? 'bg-primary text-dark-bg shadow-sm'
                       : 'text-dark-muted hover:text-dark-text'
                   }`}
                 >
@@ -219,7 +219,7 @@ export default function AddTransaction() {
               {/* 提交 */}
               <button
                 type="submit"
-                className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-medium text-dark-bg transition-all duration-200 ease-out-expo hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 添加记录
               </button>

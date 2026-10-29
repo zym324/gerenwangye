@@ -5,12 +5,12 @@
 /* ── CSS Variables（设计系统 Design Tokens） ── */
 :root {
   /* 强调色可配置 — 修改这里即可切换主题色（RGB 三元组，支持透明度修饰符） */
-  --color-primary: 123 115 255; /* #7B73FF，深色背景下满足 AA 对比度 */
-  --color-accent: 167 139 250; /* #A78BFA */
+  --color-primary: 129 140 248; /* #818CF8，仅按钮/悬停点缀，占比 < 10% */
+  --color-accent: 45 212 191; /* #2DD4BF，渐变/点缀 */
 
-  /* 字体变量（由 next/font 或 CSS 注入，此处提供 fallback） */
-  --font-inter: 'Inter', 'system-ui', sans-serif;
-  --font-noto-sc: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  /* 字体变量（MiSans 需 @font-face 自托管，离线失败自动 fallback） */
+  --font-inter: 'Inter', 'MiSans', 'system-ui', sans-serif;
+  --font-noto-sc: 'Noto Sans SC', 'MiSans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-jetbrains: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 }
 
@@ -23,6 +23,11 @@
   body {
     @apply bg-dark-bg font-sans text-dark-text antialiased;
     overflow-x: hidden;
+  }
+
+  /* 正文行高 1.6~1.8，拒绝细体 */
+  p {
+    font-weight: 400;
   }
 
   /* 尊重 prefers-reduced-motion */
@@ -40,21 +45,21 @@
 
 /* ── Markdown 内容样式（.md-content） ── */
 .md-content {
-  line-height: 1.8;
-  color: #b0b8c8;
+  line-height: 1.75;
+  color: #cbd5e1;
 }
 .md-content h2 {
   font-size: 1.5rem;
-  font-weight: 700;
-  color: #e6eaf2;
+  font-weight: 600;
+  color: #e2e8f0;
   margin: 2rem 0 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #1e2a40;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .md-content h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #e6eaf2;
+  color: #e2e8f0;
   margin: 1.5rem 0 0.75rem;
 }
 .md-content p {
@@ -78,9 +83,9 @@
   border-left: 3px solid rgb(var(--color-primary));
   padding: 0.5rem 1rem;
   margin: 1rem 0;
-  background: rgba(108, 99, 255, 0.06);
+  background: rgba(129, 140, 248, 0.08);
   border-radius: 0 12px 12px 0;
-  color: #8b95a8;
+  color: #94a3b8;
 }
 .md-content blockquote p {
   margin: 0.25rem 0;
@@ -96,14 +101,14 @@
 .md-content code {
   font-family: var(--font-jetbrains);
   font-size: 0.85em;
-  background: #141929;
+  background: #1e293b;
   color: rgb(var(--color-accent));
   padding: 0.2em 0.4em;
   border-radius: 6px;
 }
 .md-content pre {
-  background: #0e1220;
-  border: 1px solid #1e2a40;
+  background: #0b1120;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 1rem 1.25rem;
   margin: 1rem 0;
@@ -114,7 +119,7 @@
 .md-content pre code {
   background: none;
   padding: 0;
-  color: #e6eaf2;
+  color: #e2e8f0;
   font-size: inherit;
 }
 .md-content table {
@@ -125,14 +130,14 @@
 }
 .md-content th,
 .md-content td {
-  border: 1px solid #1e2a40;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.5rem 0.75rem;
   text-align: left;
 }
 .md-content th {
-  background: #141929;
+  background: #1e293b;
   font-weight: 600;
-  color: #e6eaf2;
+  color: #e2e8f0;
 }
 .md-content img {
   max-width: 100%;
@@ -140,11 +145,11 @@
 }
 .md-content hr {
   border: none;
-  border-top: 1px solid #1e2a40;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   margin: 2rem 0;
 }
 .md-content strong {
-  color: #e6eaf2;
+  color: #e2e8f0;
   font-weight: 600;
 }
 
@@ -152,9 +157,9 @@
 .skeleton {
   background: linear-gradient(
     90deg,
-    #141929 25%,
-    #1e2a40 50%,
-    #141929 75%
+    #1e293b 25%,
+    #2a3a55 50%,
+    #1e293b 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;

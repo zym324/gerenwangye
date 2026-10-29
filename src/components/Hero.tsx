@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 text-center">
         {/* Avatar */}
         <div className="relative">
-          <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-primary/40 shadow-[0_0_30px_rgba(108,99,255,0.25)] md:h-32 md:w-32">
+          <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-primary/40 md:h-32 md:w-32">
             {/* 占位头像 */}
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/30 to-accent/30 text-4xl font-bold text-dark-text">
               {profile.name.charAt(0)}
@@ -35,13 +35,13 @@ export default function Hero() {
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a
             href="#projects"
-            className="rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+            className="rounded-xl bg-primary px-6 py-3 text-sm font-medium text-dark-bg transition-all duration-200 ease-out-expo hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
           >
             查看项目
           </a>
           <a
             href="#contact"
-            className="rounded-lg border border-dark-border px-6 py-3 text-sm font-medium text-dark-text transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            className="rounded-xl border border-dark-border bg-dark-card/60 px-6 py-3 text-sm font-medium text-dark-text backdrop-blur-md transition-all duration-200 ease-out-expo hover:-translate-y-0.5 hover:border-white/25 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           >
             联系我
           </a>

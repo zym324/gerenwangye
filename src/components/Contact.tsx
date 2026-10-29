@@ -52,7 +52,7 @@ export default function Contact() {
         <div className="grid gap-8 md:grid-cols-2">
           {/* 左侧：信息 */}
           <div className="space-y-6">
-            <div className="rounded-xl border border-dark-border/60 bg-dark-card/50 p-6">
+            <div className="rounded-card border border-dark-border bg-dark-card/60 p-6 backdrop-blur-md">
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
                 社交链接
               </h3>
@@ -91,7 +91,7 @@ export default function Contact() {
           {/* 右侧：表单 */}
           <form
             onSubmit={handleSubmit}
-            className="rounded-xl border border-dark-border/60 bg-dark-card/50 p-6"
+            className="rounded-card border border-dark-border bg-dark-card/60 p-6 backdrop-blur-md"
             noValidate
           >
             <div className="space-y-4">
@@ -139,7 +139,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-medium text-dark-bg transition-all duration-200 ease-out-expo hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 {status === 'sending' ? '发送中…' : '发送消息'}
               </button>

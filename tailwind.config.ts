@@ -9,11 +9,11 @@ const config: Config = {
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
         dark: {
-          bg: '#0B0F1A',
-          card: '#141929',
-          border: '#1E2A40',
-          text: '#E6EAF2',
-          muted: '#8B95A8',
+          bg: '#0F172A',        // 深灰蓝主背景（拒绝纯黑）
+          card: '#1E293B',       // 卡片底色（与背景微弱明度差）
+          border: 'rgba(255, 255, 255, 0.08)', // 极细透白边框
+          text: '#E2E8F0',       // 柔和灰白主文字（拒绝纯白）
+          muted: '#94A3B8',      // 次要文字
         },
       },
       fontFamily: {
@@ -24,7 +24,7 @@ const config: Config = {
         content: '75rem', // 1200px
       },
       borderRadius: {
-        card: '14px',
+        card: '16px', // 卡片 16px（rounded-2xl 区间）；按钮用 rounded-xl (12px)
       },
       animation: {
         'fade-up': 'fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both',

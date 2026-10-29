@@ -44,7 +44,7 @@ export default function BlogPostPage() {
           <h1 className="mt-4 text-2xl font-bold text-dark-text">文章不存在</h1>
           <Link
             to="/"
-            className="mt-6 inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            className="mt-6 inline-block rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-dark-bg transition-all duration-200 ease-out-expo hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
           >
             返回首页
           </Link>

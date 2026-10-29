@@ -3,7 +3,7 @@ import { SocialIcon } from './SocialIcon';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-dark-border/60 py-10">
+    <footer className="border-t border-dark-border py-10">
       <div className="mx-auto flex max-w-content flex-col items-center gap-5 px-4 md:px-6">
         <div className="flex items-center gap-4">
           {profile.socials.map((s) => (

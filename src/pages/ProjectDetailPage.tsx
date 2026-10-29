@@ -18,7 +18,7 @@ export default function ProjectDetailPage() {
           </h1>
           <Link
             to="/"
-            className="mt-6 inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            className="mt-6 inline-block rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-dark-bg transition-all duration-200 ease-out-expo hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
           >
             返回首页
           </Link>
@@ -61,7 +61,7 @@ export default function ProjectDetailPage() {
             {project.title}
           </h1>
           {project.featured && (
-            <span className="rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold text-white">
+            <span className="rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold text-dark-bg">
               Featured
             </span>
           )}
@@ -100,7 +100,7 @@ export default function ProjectDetailPage() {
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                className="rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 ease-out-expo hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 在线 Demo
               </a>
@@ -110,7 +110,7 @@ export default function ProjectDetailPage() {
                 href={project.links.repo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-dark-border px-5 py-2.5 text-sm font-medium text-dark-text transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="rounded-xl border border-dark-border bg-dark-card/60 px-5 py-2.5 text-sm font-medium text-dark-text backdrop-blur-md transition-all duration-200 ease-out-expo hover:-translate-y-0.5 hover:border-white/25 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               >
                 GitHub 源码
               </a>

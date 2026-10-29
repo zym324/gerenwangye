@@ -7,11 +7,25 @@ interface Star {
   baseOpacity: number;
   drift: number;
   twinkle: number;
-  layer: number; // 视差层：0 远 1 中 2 近
+  layer: number; // 0 远 1 中 2 近
 }
 
 const LAYER_DRIFT = [0.03, 0.06, 0.1];
 const LAYER_RADIUS = [0.5, 1.0, 1.6];
+/* 星点聚集带：顶部 0–15% 与底部 85–100%，中间阅读区保持纯净 */
+const TOP_BAND = 0.15;
+const BOTTOM_BAND = 0.15;
+/* 视觉克制：星星最大亮度 0.55，防止光晕刺眼 */
+const MAX_ALPHA = 0.55;
+
+/** 生成"顶部或底部边缘"的 y 坐标（中间 70% 区域不放星点） */
+function edgeY(height: number): number {
+  const inTop = Math.random() < 0.6;
+  const band = inTop
+    ? Math.random() * (height * TOP_BAND)
+    : height * (1 - BOTTOM_BAND) + Math.random() * (height * BOTTOM_BAND);
+  return band;
+}
 
 export default function Starfield() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,10 +51,12 @@ export default function Starfield() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     function resize() {
-      width = canvas!.width = window.innerWidth;
-      height = canvas!.height = window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
       canvas!.width = width * dpr;
       canvas!.height = height * dpr;
+      canvas!.style.width = `${width}px`;
+      canvas!.style.height = `${height}px`;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     resize();
@@ -52,14 +68,25 @@ export default function Starfield() {
       const layer = i % 3;
       return {
         x: Math.random() * width,
-        y: Math.random() * height,
+        y: edgeY(height),
         radius: LAYER_RADIUS[layer] * (0.7 + Math.random() * 0.6),
-        baseOpacity: 0.25 + Math.random() * 0.6,
+        baseOpacity: 0.2 + Math.random() * 0.4,
         drift: LAYER_DRIFT[layer] * (0.8 + Math.random() * 0.4),
         twinkle: Math.random() * Math.PI * 2,
         layer,
       };
     });
+
+    function render(alphaFn: (s: Star) => number) {
+      ctx!.clearRect(0, 0, width, height);
+      for (const s of stars) {
+        const alpha = Math.min(alphaFn(s), MAX_ALPHA);
+        ctx!.beginPath();
+        ctx!.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+        ctx!.fill();
+      }
+    }
 
     let raf = 0;
     let running = false;
@@ -70,21 +97,16 @@ export default function Starfield() {
       const dt = Math.min((ts - lastTs) / 16.67, 3); // 帧间步进
       lastTs = ts;
 
-      ctx!.clearRect(0, 0, width, height);
       for (const s of stars) {
         s.twinkle += 0.012 * dt;
         s.y -= s.drift * dt;
+        // 星点只在顶部带内缓慢上浮，出顶部后重生于边缘带
         if (s.y < -4) {
-          s.y = height + 4;
+          s.y = edgeY(height);
           s.x = Math.random() * width;
         }
-        const alpha =
-          s.baseOpacity * (0.45 + 0.55 * Math.sin(s.twinkle));
-        ctx!.beginPath();
-        ctx!.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
-        ctx!.fill();
       }
+      render((s) => s.baseOpacity * (0.45 + 0.55 * Math.sin(s.twinkle)));
       raf = requestAnimationFrame(draw);
     }
 
@@ -100,25 +122,6 @@ export default function Starfield() {
       cancelAnimationFrame(raf);
     }
 
-    // 视差：滚动 / 鼠标移动时按层偏移
-    let scrollY = 0;
-    function onScroll() {
-      scrollY = window.scrollY;
-      if (reduced) return; // 减动效时不重绘
-      // 单帧偏移绘制
-      ctx!.clearRect(0, 0, width, height);
-      for (const s of stars) {
-        const py = s.y + scrollY * LAYER_DRIFT[s.layer] * 0.4;
-        const pyMod = py % (height + 4);
-        const yy = pyMod < 0 ? pyMod + height + 4 : pyMod;
-        ctx!.beginPath();
-        ctx!.arc(s.x, yy, s.radius, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(255,255,255,${s.baseOpacity.toFixed(3)})`;
-        ctx!.fill();
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-
     const onVisibility = () => {
       if (document.visibilityState === 'hidden') stop();
       else if (!reduced) start();
@@ -127,23 +130,17 @@ export default function Starfield() {
 
     const onResize = () => {
       resize();
-      // 重分布星星到新尺寸
       for (const s of stars) {
         if (s.x > width) s.x = Math.random() * width;
-        if (s.y > height) s.y = Math.random() * height;
+        s.y = edgeY(height);
       }
+      if (reduced) render((s) => s.baseOpacity);
     };
     window.addEventListener('resize', onResize);
 
     if (reduced) {
       // 减动效：静态绘制一次
-      ctx!.clearRect(0, 0, width, height);
-      for (const s of stars) {
-        ctx!.beginPath();
-        ctx!.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(255,255,255,${s.baseOpacity.toFixed(3)})`;
-        ctx!.fill();
-      }
+      render((s) => s.baseOpacity);
     } else {
       start();
     }
@@ -151,7 +148,6 @@ export default function Starfield() {
     return () => {
       stop();
       media.removeEventListener('change', onMotionPref);
-      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       document.removeEventListener('visibilitychange', onVisibility);
     };

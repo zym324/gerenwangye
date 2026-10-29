@@ -14,7 +14,7 @@ export default function NotFoundPage() {
         </p>
         <Link
           to="/"
-          className="mt-8 inline-block rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          className="mt-8 inline-block rounded-xl bg-primary px-6 py-3 text-sm font-medium text-dark-bg transition-all duration-200 ease-out-expo hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         >
           回到首页
         </Link>
